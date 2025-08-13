@@ -1,6 +1,4 @@
 /node_modules
-/public/hot
-/public/fonts
 /public/mix-manifest.json
 /vendor
 .env.backup
@@ -9,5 +7,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/public/assets
 .idea/
