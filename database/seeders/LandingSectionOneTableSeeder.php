@@ -13,9 +13,9 @@ class LandingSectionOneTableSeeder extends Seeder
     public function run(): void
     {
         $input = [
-            'text_main' => 'Manage Hospital Never Before',
-            'text_secondary' => 'A Next Level Evolution In Healthcare IT, Web Based EMR, Revenue Cycle Management Solution, Designed To Meet The Opportunities.',
-            'img_url' => ('/assets/landing-theme/images/banner/section_one.png'),
+            'text_main' => 'Centros Medicos',
+            'text_secondary' => 'Una evolución de siguiente nivel en TI de atención médica, EMR basado en la web, diseñada para aprovechar las oportunidades.',
+            'img_url' => ('/assets/landing-theme/images/banner/section.png'),
         ];
 
         SectionOne::create($input);

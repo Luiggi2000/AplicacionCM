@@ -9,8 +9,8 @@ use App\Models\LunchBreak;
 use App\Models\Schedule;
 use App\Models\ScheduleDay;
 use App\Models\User;
-use Arr;
-use Auth;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ScheduleRepository
@@ -115,28 +115,47 @@ class ScheduleRepository extends BaseRepository
     }
 
     public function getDoctorSchedule($input)
-    {
+{
+    $data = [];
 
-        $data['doctorBreak'] = [];
+    $data['doctorBreak'] = [];
 
-        $data['scheduleDay'] = ScheduleDay::where('doctor_id', $input['doctor_id'])->Where('available_on',
-            $input['day_name'])->get();
+    $data['scheduleDay'] = ScheduleDay::where('doctor_id', $input['doctor_id'])
+        ->where('available_on', $input['day_name'])
+        ->get();
 
-        $data['perPatientTime'] = Schedule::whereDoctorId($input['doctor_id'])->get();
+    $data['perPatientTime'] = Schedule::whereDoctorId($input['doctor_id'])->get();
 
-        if(isset($input['date'])){
-            $data['doctorHoliday'] = DoctorHoliday::where('doctor_id', $input['doctor_id'])->where('date', $input['date'])->get();
-            $data['break'] = LunchBreak::where('doctor_id', $input['doctor_id'])->where('date',$input['date'])->get();
-            if($data['break']->count() == 0){
-                $data['doctorBreak'] = LunchBreak::where('doctor_id', $input['doctor_id'])->whereNotNull('every_day')->get();
-            }else{
-                $data['doctorBreak'] = LunchBreak::where('doctor_id', $input['doctor_id'])->where('date',$input['date'])->get();;
-            }
-        }else{
-            $data['doctorHoliday'] = DoctorHoliday::where('doctor_id', $input['doctor_id'])->get();
-            $data['doctorBreak'] = LunchBreak::where('doctor_id', $input['doctor_id'])->whereNotNull('every_day')->get();
-       }
+    // Aquí agregamos obtener el schedule principal o primero
+    $schedule = Schedule::where('doctor_id', $input['doctor_id'])->first();
+    $data['schedule'] = $schedule; // guardamos el objeto completo
 
-        return $data;
+    if (isset($input['date'])) {
+        $data['doctorHoliday'] = DoctorHoliday::where('doctor_id', $input['doctor_id'])
+            ->where('date', $input['date'])
+            ->get();
+
+        $data['break'] = LunchBreak::where('doctor_id', $input['doctor_id'])
+            ->where('date', $input['date'])
+            ->get();
+
+        if ($data['break']->count() == 0) {
+            $data['doctorBreak'] = LunchBreak::where('doctor_id', $input['doctor_id'])
+                ->whereNotNull('every_day')
+                ->get();
+        } else {
+            $data['doctorBreak'] = LunchBreak::where('doctor_id', $input['doctor_id'])
+                ->where('date', $input['date'])
+                ->get();
+        }
+    } else {
+        $data['doctorHoliday'] = DoctorHoliday::where('doctor_id', $input['doctor_id'])->get();
+        $data['doctorBreak'] = LunchBreak::where('doctor_id', $input['doctor_id'])
+            ->whereNotNull('every_day')
+            ->get();
     }
+
+    return $data;
+}
+
 }

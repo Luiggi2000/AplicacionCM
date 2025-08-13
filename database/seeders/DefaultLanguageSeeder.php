@@ -15,7 +15,7 @@ class DefaultLanguageSeeder extends Seeder
     {
         $defaultLanguage = SuperAdminSetting::where('key','default_language')->exists();
         if(!$defaultLanguage){
-            SuperAdminSetting::create(['key' => 'default_language', 'value' => 'en']);
+            SuperAdminSetting::create(['key' => 'default_language', 'value' => 'es']);
         }
     }
 }

@@ -22,10 +22,10 @@ class LandingSectionFiveTableSeeder extends Seeder
             'card_two_number' => 455,
             'card_three_number' => 365,
             'card_four_number' => 528,
-            'card_one_text' => 'Services',
-            'card_two_text' => 'Team Members',
-            'card_three_text' => 'Happy Patients',
-            'card_four_text' => 'Tonic Research',
+            'card_one_text' => 'Servicios',
+            'card_two_text' => 'Miembros de equipo',
+            'card_three_text' => 'Pacientes felices',
+            'card_four_text' => 'Investigación tónica',
         ];
 
         SectionFive::create($input);

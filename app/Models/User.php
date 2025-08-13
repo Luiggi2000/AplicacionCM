@@ -240,7 +240,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'de' => 'German',
         'pt' => 'Portuguese',
         'ru' => 'Russian',
-        'es' => 'Spanish',
+        'es' => 'Español',
         'tr' => 'Turkish',
     ];
 
@@ -348,7 +348,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      */
     protected $appends = ['full_name', 'age'];
 
-    /**
+    /**m
      * @var array
      */
     public static $messages = [

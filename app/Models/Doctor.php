@@ -117,7 +117,7 @@ class Doctor extends Model implements HasMedia
         'qualification' => 'required',
         'dob' => 'nullable|date',
         'specialist' => 'required',
-        'image' => 'mimes:jpeg,png,jpg,gif,webp',
+        'image_url' => 'mimes:jpeg,png,jpg,gif,webp',
     ];
 
     public const GOOGLE_JSON_FILE_PATH = 'google_json_file';
