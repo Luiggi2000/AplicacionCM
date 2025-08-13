@@ -22,13 +22,18 @@ class CreateUserRequest extends FormRequest
      * Get the validation rules that apply to the request.
      */
     public function rules(): array
-    {
-        $rules = User::$rules;
-        if (request()->get('department_id') == 2) {
-            $rules['doctor_department_id'] = 'required';
-        }
-        $rules['image_url'] = 'nullable|mimes:jpeg,png,jpg,gif,webp';
+{
+    return [
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|email:filter|unique:users,email',
+        'password' => 'nullable|same:password_confirmation|min:6',
+        'department_id' => 'required|integer',
+        'doctor_department_id' => request()->get('department_id') == 2 ? 'required' : 'nullable',
+        'gender' => 'required|string',
+        'dob' => 'nullable|date',
+        'image_url' => 'nullable|mimes:jpeg,png,jpg,gif,webp',
+    ];
+}
 
-        return $rules;
-    }
 }
