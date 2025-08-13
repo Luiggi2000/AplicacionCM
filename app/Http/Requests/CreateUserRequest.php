@@ -27,7 +27,7 @@ class CreateUserRequest extends FormRequest
         if (request()->get('department_id') == 2) {
             $rules['doctor_department_id'] = 'required';
         }
-        $rules['image_url'] = 'mimes:jpeg,png,jpg,gif,webp';
+        $rules['image_url'] = 'nullable|mimes:jpeg,png,jpg,gif,webp';
 
         return $rules;
     }
